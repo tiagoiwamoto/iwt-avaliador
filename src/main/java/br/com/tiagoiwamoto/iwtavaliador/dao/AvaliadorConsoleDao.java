@@ -12,7 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AvaliadorConsoleDao {
-	
+
+	private AvaliadorConsoleDao() {
+	}
+
 	public static String processaVotos(long matricula, int votoSelecionado) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		Connection conn = null;
 		String msg;
@@ -93,12 +96,12 @@ public class AvaliadorConsoleDao {
 		return msg;
 	}
 	
-	public static String atualizaProfessor(ProfessorConsole professor, int Matricula) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+	public static String atualizaProfessor(ProfessorConsole professor, int matricula) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		Connection conn = null;
 		String msg;
 		try{
 			conn = DBClass.getConnection();
-			ResultSet verificaMatricula = DBClass.getResultSet(conn, "SELECT MATRICULA FROM TBL_PROFESSORES WHERE MATRICULA = " + Matricula);
+			ResultSet verificaMatricula = DBClass.getResultSet(conn, "SELECT MATRICULA FROM TBL_PROFESSORES WHERE MATRICULA = " + matricula);
 			if(!verificaMatricula.next()){
 				msg = "Desculpe mas esta Matricula não existe!";
 				return msg;
@@ -108,7 +111,7 @@ public class AvaliadorConsoleDao {
 			preparaUpdate.setString(2, professor.Endereco);
 			preparaUpdate.setInt(3, professor.Idade);
 			preparaUpdate.setString(4, professor.Materia);
-			preparaUpdate.setLong(5, Matricula);
+			preparaUpdate.setLong(5, matricula);
 				if(preparaUpdate.executeUpdate() != 0){
 					msg = App.usuarioAtual + " o registro foi atualizado com sucesso !!";
 					
@@ -124,18 +127,18 @@ public class AvaliadorConsoleDao {
 		return msg;
 	}
 	
-	public static String excluiProfessor(int Matricula) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+	public static String excluiProfessor(int matricula) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		Connection conn = null;
 		String msg;
 		try{
 			conn = DBClass.getConnection();
-			ResultSet verificaExiste = DBClass.getResultSet(conn, "SELECT MATRICULA FROM TBL_PROFESSORES WHERE MATRICULA = " + Matricula);
+			ResultSet verificaExiste = DBClass.getResultSet(conn, "SELECT MATRICULA FROM TBL_PROFESSORES WHERE MATRICULA = " + matricula);
 				if(!verificaExiste.next()){
 					msg = "Não existe professor com está matricula!!";
 					return msg;
 				}
 			PreparedStatement preparaExcluir = DBClass.getPreparedStatement(conn, "DELETE FROM TBL_PROFESSORES WHERE MATRICULA = ?");
-			preparaExcluir.setInt(1, Matricula);
+			preparaExcluir.setInt(1, matricula);
 				if(preparaExcluir.executeUpdate() != 0){
 					msg= App.usuarioAtual + " o professor excluido com sucesso !!!";
 				}else{
@@ -149,7 +152,7 @@ public class AvaliadorConsoleDao {
 		return msg;
 	}
 	
-	public static List<ProfessorConsole>  buscaProfessor(String Nome) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
+	public static List<ProfessorConsole>  buscaProfessor(String nome) throws InstantiationException, IllegalAccessException, ClassNotFoundException, SQLException{
 		Connection conn = null;
 		List<ProfessorConsole> lista = new ArrayList<>();
 		try{
@@ -157,7 +160,7 @@ public class AvaliadorConsoleDao {
 			
 			conn = DBClass.getConnection();
 			//ResultSet exibindoBusca = DBClass.getResultSet(conn, "SELECT * FROM TBL_PROFESSORES WHERE NOME = " + "'" + Nome + "'");
-			ResultSet exibindoBusca = DBClass.getResultSet(conn, "SELECT * FROM TBL_PROFESSORES WHERE NOME LIKE '%" + Nome + "%'");
+			ResultSet exibindoBusca = DBClass.getResultSet(conn, "SELECT * FROM TBL_PROFESSORES WHERE NOME LIKE '%".concat(nome).concat("%'"));
 			while(exibindoBusca.next()){
 				
 				ProfessorConsole professorConsole = new ProfessorConsole();
@@ -214,7 +217,10 @@ public class AvaliadorConsoleDao {
 		List<ProfessorConsole> lista = new ArrayList<>();
 		try{
 			conn = DBClass.getConnection();
-			ResultSet resultado = DBClass.getResultSet(conn, "SELECT * FROM TBL_PROFESSORES ORDER BY " + filtro + " DESC");
+			if(filtro == null || filtro.isEmpty() || filtro.isBlank()){
+				filtro = "ID";
+			}
+			ResultSet resultado = DBClass.getResultSet(conn, "SELECT * FROM TBL_PROFESSORES ORDER BY ".concat(filtro).concat(" DESC"));
 				
 			while(resultado.next()){
 				ProfessorConsole professorConsole = new ProfessorConsole();

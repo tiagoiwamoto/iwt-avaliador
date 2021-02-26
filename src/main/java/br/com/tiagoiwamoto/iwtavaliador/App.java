@@ -161,7 +161,7 @@ public class App {
         filtro = Leitor.readString(usuarioAtual + " o filtro para exibir os professores em ordem: ");
 
         //Digitando 1 seta o filtro com VOTO_BOM
-        if(filtro.equals("1")){
+        if(filtro.equals("1") || filtro.isEmpty() || filtro.isBlank()){
             filtro = "VOTO_BOM";
         }
         //Digitando 2 seta o filtro com VOTO_RUIM

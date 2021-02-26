@@ -49,7 +49,7 @@ public class ClasseAuxiliar {
 
 	}
 	
-	public static void limpaTela(){
+	public static void limpaTela() {
 		for(int i = 0; i < 50; i++){
 			System.out.println("");
 		}
