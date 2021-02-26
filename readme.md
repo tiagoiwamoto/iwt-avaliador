@@ -7,3 +7,4 @@
     mvn clean package
 
 ### Screenshots
+![Preview](docs/preview.gif)
