@@ -3,6 +3,7 @@ create table TBL_PROFESSORES
     ID INTEGER not null
         constraint TBL_PROFESSORES_pk
             primary key autoincrement,
+    MATRICULA TEXT,
     NOME TEXT,
     ENDERECO TEXT,
     IDADE INTEGER,
