@@ -21,10 +21,10 @@ public class CadastroDeCandidatoUsecase {
 
         if(inserirNovoRegistro == 1){
             Candidato candidato = new Candidato();
-            candidato.setMateria(Leitor.readString("  Matéria: "));
-            candidato.setEndereco(Leitor.readString(" Endereço: "));
-            candidato.setNome(Leitor.readString("     Nome: "));
-            candidato.setDataNascimento(LocalDate.parse(Leitor.readString(" Data de nascimento: "), DateTimeFormatter.ofPattern("yyyy-MM-dd")));
+            candidato.setMateria(Leitor.readString("                     Matéria: "));
+            candidato.setEndereco(Leitor.readString("                   Endereço: "));
+            candidato.setNome(Leitor.readString("                           Nome: "));
+            candidato.setDataNascimento(LocalDate.parse(Leitor.readString(" Data de nascimento[dd/MM/yyyy]: "), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             candidato.setMatricula(Leitor.readString("Matricula: "));
             Candidato candidatoCadastrado = cadastrarCandidatoAdapter.cadastrarCandidato(candidato);
             if(Objects.nonNull(candidatoCadastrado)){
@@ -33,6 +33,8 @@ public class CadastroDeCandidatoUsecase {
                 App.home();
             }
         }else{
+            LimpaTela.execute();
+            System.out.println("====== Não foi possível cadastrar o candidato ======");
             App.home();
         }
 
