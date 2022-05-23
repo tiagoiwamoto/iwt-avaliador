@@ -10,4 +10,6 @@ public class Constants {
     public final static String NOME = "                           Nome: ";
     public final static String DATA_NASCIMENTO = " Data de nascimento[dd/MM/yyyy]: ";
 
+    public final static String NENHUM_CANDIDATO = "Não localizamos nenhum candidato com essa matricula.";
+
 }

@@ -4,18 +4,14 @@ import br.com.tiagoiwamoto.core.domain.enums.Opcao;
 import br.com.tiagoiwamoto.core.usecase.AdminUsecase;
 import br.com.tiagoiwamoto.core.usecase.CadastrarVotoCandidatoUsecase;
 import br.com.tiagoiwamoto.core.usecase.ResultadoParcialUsecase;
-import br.com.tiagoiwamoto.core.util.Leitor;
 import br.com.tiagoiwamoto.core.util.AppUtils;
-import br.com.tiagoiwamoto.core.util.LimpaTela;
-import br.com.tiagoiwamoto.core.util.Validacao;
-
-import java.io.IOException;
+import br.com.tiagoiwamoto.core.util.Leitor;
 
 public class App {
 
     public static String usuarioLogado = "";
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         home();
     }
 
@@ -24,8 +20,8 @@ public class App {
         int opcaoSelecionada = Leitor.readInt("Selecione entre as opções 1, 2, 3 e 4: ");
 
         Opcao opcao = Opcao.value(opcaoSelecionada);
-        if(Validacao.validarOpcaoSelecionada(opcaoSelecionada)){
-            LimpaTela.execute();
+        if(AppUtils.validarOpcaoSelecionada(opcaoSelecionada)){
+            AppUtils.limpaTela();
             System.out.printf("Opção selecionada %d é inválida", opcaoSelecionada);
             System.out.println();
             header();
@@ -44,7 +40,7 @@ public class App {
     }
 
     public static void closeApp() {
-        LimpaTela.execute();
+        AppUtils.limpaTela();
         AppUtils.lerArquivo("src/main/resources/end.txt");
         System.exit(0);
     }

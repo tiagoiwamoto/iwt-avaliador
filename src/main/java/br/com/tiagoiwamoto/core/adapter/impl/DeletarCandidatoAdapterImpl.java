@@ -4,6 +4,7 @@ import br.com.tiagoiwamoto.config.DatabaseConnect;
 import br.com.tiagoiwamoto.core.adapter.DeletarCandidatoAdapter;
 import br.com.tiagoiwamoto.core.domain.model.Candidato;
 import br.com.tiagoiwamoto.core.usecase.AdminUsecase;
+import br.com.tiagoiwamoto.core.util.Constants;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,7 +16,7 @@ public class DeletarCandidatoAdapterImpl implements DeletarCandidatoAdapter {
         try(Connection connection = DatabaseConnect.connection()) {
             Candidato candidato = new ConsultaCandidatoAdapterImpl().buscaCandidatoPorMatricula(matricula);
             if(Objects.isNull(candidato)){
-                System.out.println("Não localizamos nenhum candidato com essa matricula.");
+                System.out.println(Constants.NENHUM_CANDIDATO);
                 AdminUsecase.homeAdmin();
             }
             PreparedStatement preparedStatement = DatabaseConnect

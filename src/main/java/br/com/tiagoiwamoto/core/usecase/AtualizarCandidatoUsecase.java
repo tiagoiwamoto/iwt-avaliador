@@ -2,12 +2,11 @@ package br.com.tiagoiwamoto.core.usecase;
 
 import br.com.tiagoiwamoto.App;
 import br.com.tiagoiwamoto.core.adapter.impl.AtualizaCandidatoAdapterImpl;
-import br.com.tiagoiwamoto.core.adapter.impl.CadastrarCandidatoAdapterImpl;
 import br.com.tiagoiwamoto.core.adapter.impl.ConsultaCandidatoAdapterImpl;
 import br.com.tiagoiwamoto.core.domain.model.Candidato;
+import br.com.tiagoiwamoto.core.util.AppUtils;
 import br.com.tiagoiwamoto.core.util.Constants;
 import br.com.tiagoiwamoto.core.util.Leitor;
-import br.com.tiagoiwamoto.core.util.LimpaTela;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -23,7 +22,7 @@ public class AtualizarCandidatoUsecase {
 
         List<Candidato> candidatos = new ConsultaCandidatoAdapterImpl().buscarCandidados();
         if(candidatos.isEmpty()){
-            LimpaTela.execute();
+            AppUtils.limpaTela();
             System.out.println("Desculpe, ainda não temos candidatos cadastrados...");
             App.home();
         }
@@ -43,7 +42,7 @@ public class AtualizarCandidatoUsecase {
         candidatoParaAtualizar.setMatricula(Leitor.readString(Constants.MATRICULA));
         Candidato candidatoCadastrado = atualizaCandidatoAdapter.atualizarCandidato(candidatoParaAtualizar);
         if(Objects.nonNull(candidatoCadastrado)){
-            LimpaTela.execute();
+            AppUtils.limpaTela();
             System.out.println("====== Candidato atualizado com sucesso ! ======");
             App.home();
         }

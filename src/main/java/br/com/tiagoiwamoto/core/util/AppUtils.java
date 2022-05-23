@@ -23,4 +23,14 @@ public class AppUtils {
         }
     }
 
+    public static void limpaTela(){
+        for(int linha = 0; linha < 50; linha++){
+            System.out.println();
+        }
+    }
+
+    public static boolean validarOpcaoSelecionada(int value){
+        return value < 0 || value > 4;
+    }
+
 }

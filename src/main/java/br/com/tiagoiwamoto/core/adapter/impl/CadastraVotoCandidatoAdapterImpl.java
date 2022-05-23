@@ -6,6 +6,7 @@ import br.com.tiagoiwamoto.core.domain.enums.VotoType;
 import br.com.tiagoiwamoto.core.domain.model.Candidato;
 import br.com.tiagoiwamoto.core.domain.model.CandidatoVoto;
 import br.com.tiagoiwamoto.core.usecase.AdminUsecase;
+import br.com.tiagoiwamoto.core.util.Constants;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -18,7 +19,7 @@ public class CadastraVotoCandidatoAdapterImpl implements CadastraVotoCandidatoAd
         try(Connection connection = DatabaseConnect.connection()){
             Candidato candidato = new ConsultaCandidatoAdapterImpl().buscaCandidatoPorMatricula(matricula);
             if(Objects.isNull(candidato)){
-                System.out.println("Não localizamos nenhum candidato com essa matricula.");
+                System.out.println(Constants.NENHUM_CANDIDATO);
                 AdminUsecase.homeAdmin();
             }
             PreparedStatement preparedStatement =
@@ -29,7 +30,7 @@ public class CadastraVotoCandidatoAdapterImpl implements CadastraVotoCandidatoAd
             if(result == 1){
                 return new CandidatoVoto(preparedStatement.getGeneratedKeys().getLong(1), votoType, candidato.getId());
             }else{
-                System.out.println("Não foi possível votar este candidato");
+                System.out.println("Não foi possível votar neste candidato");
                 return null;
             }
         }catch (SQLException e){

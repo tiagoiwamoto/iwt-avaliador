@@ -6,7 +6,6 @@ import br.com.tiagoiwamoto.core.adapter.impl.ConsultaCandidatoVotoAdapterImpl;
 import br.com.tiagoiwamoto.core.domain.enums.VotoType;
 import br.com.tiagoiwamoto.core.domain.model.Candidato;
 import br.com.tiagoiwamoto.core.domain.model.CandidatoComVoto;
-import br.com.tiagoiwamoto.core.domain.model.CandidatoVoto;
 import br.com.tiagoiwamoto.core.util.Leitor;
 
 import java.time.format.DateTimeFormatter;
