@@ -3,6 +3,7 @@ package br.com.tiagoiwamoto.core.usecase;
 import br.com.tiagoiwamoto.App;
 import br.com.tiagoiwamoto.core.adapter.impl.CadastrarCandidatoAdapterImpl;
 import br.com.tiagoiwamoto.core.domain.model.Candidato;
+import br.com.tiagoiwamoto.core.util.Constants;
 import br.com.tiagoiwamoto.core.util.Leitor;
 import br.com.tiagoiwamoto.core.util.LimpaTela;
 
@@ -21,11 +22,11 @@ public class CadastroDeCandidatoUsecase {
 
         if(inserirNovoRegistro == 1){
             Candidato candidato = new Candidato();
-            candidato.setMateria(Leitor.readString("                     Matéria: "));
-            candidato.setEndereco(Leitor.readString("                   Endereço: "));
-            candidato.setNome(Leitor.readString("                           Nome: "));
-            candidato.setDataNascimento(LocalDate.parse(Leitor.readString(" Data de nascimento[dd/MM/yyyy]: "), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-            candidato.setMatricula(Leitor.readString("Matricula: "));
+            candidato.setMateria(Leitor.readString(Constants.MATERIA));
+            candidato.setEndereco(Leitor.readString(Constants.ENDERECO));
+            candidato.setNome(Leitor.readString(Constants.NOME));
+            candidato.setDataNascimento(LocalDate.parse(Leitor.readString(Constants.DATA_NASCIMENTO), DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            candidato.setMatricula(Leitor.readString(Constants.MATRICULA));
             Candidato candidatoCadastrado = cadastrarCandidatoAdapter.cadastrarCandidato(candidato);
             if(Objects.nonNull(candidatoCadastrado)){
                 LimpaTela.execute();

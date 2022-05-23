@@ -20,8 +20,8 @@ public class AdminUsecase {
             Opcao opcao = Opcao.value(opcaoSelecionada);
             switch (opcao){
                 case CADASTRAR_CANDIDATO -> CadastroDeCandidatoUsecase.cadastrarCandidato();
-                case ATUALIZAR_CANDIDATO -> System.out.println();
-                case EXCLUIR_CANDIDATO -> System.out.println();
+                case ATUALIZAR_CANDIDATO -> AtualizarCandidatoUsecase.atualizarCandidato();
+                case EXCLUIR_CANDIDATO -> DeletarCandidatoUsecase.deletarCandidato();
                 default -> App.home();
             }
         }else{
